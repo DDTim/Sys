@@ -70,8 +70,9 @@ public class MainJFrame extends javax.swing.JFrame {
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
        
-        String[][] Coord_Str;
-        //String str [] = new String[] ;
+        String[] Coord_Str;
+        String[] ArrayX;
+        String[] ArrayY;
         ArrayList<String> Coord_List = new ArrayList<String>();
         
          
@@ -93,6 +94,7 @@ public class MainJFrame extends javax.swing.JFrame {
                         index = TextTNO.indexOf("\r\n", index+1);  //  поиск начала нужных данных(пропуск пяти строк)
                         }
                     String pointsTNO = TextTNO.substring(index, TextTNO.length());// K
+                    pointsTNO.trim();
                     
 
                     for (String retval : pointsTNO.split("\r\n")) {  // заполнение листа строками координат
@@ -100,9 +102,22 @@ public class MainJFrame extends javax.swing.JFrame {
                         }
                     
                     //теперь можно заполнять массив х и у координатами отдельно
-                    Coord_Str = new String[Coord_List.size()][2];
-                
+                    
+                   Coord_Str = new String[Coord_List.size()];
+                   for(int i = 0;i<Coord_List.size();i++)
+                        {
+                            Coord_List.set(i, Coord_List.get(i).trim());
+                            for (String retval : Coord_List.get(i).split("   ")) {
+                                Coord_Str[i] =  retval;
+                                System.out.println(Coord_Str[i]);     // одномерный массив координат, с покозателем Е
+                            }   
+                        }
+              //     String Str = new String("Разделяем эту строку на слова");
+
+                //                    for (String retval : Str.split(" ")) {
+                //         System.out.println(retval);}
                     }
+                
                     
                 catch(IOException ex){
                     System.out.println(ex.getMessage());
