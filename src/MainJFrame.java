@@ -71,11 +71,9 @@ public class MainJFrame extends javax.swing.JFrame {
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
        
         String[] Coords_Str;
-        //String[] ArrayXe;
-        //String[] ArrayYe;
         ArrayList<String> Coord_List = new ArrayList<String>();
-        ArrayList<String> ArrayXe = new ArrayList<String>();
-        ArrayList<String> ArrayYe = new ArrayList<String>();
+        ArrayList<Double> ArrayX = new ArrayList<Double>();
+        ArrayList<Double> ArrayY = new ArrayList<Double>();
          
         RegPointTNO reg = new RegPointTNO();
         JFileChooser fileopen = new JFileChooser(); 
@@ -108,50 +106,29 @@ public class MainJFrame extends javax.swing.JFrame {
                             Coord_List.set(i, Coord_List.get(i).trim());
                             for (String retval : Coord_List.get(i).split("   ")) {
                                 Coords_Str[j] =  retval;
-                                
-                                System.out.println(Coords_Str[j]+" Все значения");     // одномерный массив координат, с покозателем Е
+                                     // одномерный массив координат, с покозателем Е
                                 ++j;
                             }   
                         }
-                 //  ArrayXe = new String[Coord_List.size()/2];
-                 //  ArrayYe = new String[Coord_List.size()/2];
-                   for(int i = 0; i < Coords_Str.length;i = i+2){                       
-                    //   System.out.println(Coords_Str[i]+"ss");
-                       ArrayXe.add(Coords_Str[i]);
-                    //   ArrayYe.add(Coords_Str[i+1]);    
+                   double double_arg;                                // разбиваем на Х и Y
+                   for(int i = 0; i < Coords_Str.length;i = i+2){ 
+                       double_arg = Double.parseDouble(Coords_Str[i]);
+                       ArrayX.add(double_arg);
+                       
                     }
                    for(int i = 1; i < Coords_Str.length; i = i+2){
-                   //    System.out.println(Coords_Str[3]+"Yr");
-                       ArrayYe.add(Coords_Str[i]); 
-                   }
-                   
-                   
-                   for(int i = 0;i< ArrayXe.size();i++){                       
-                        System.out.println(ArrayXe.get(i)+" x");
-                       // System.out.println(" yyyyyyyyyy");
-                        //System.out.println(ArrayYe.get(i)+" y");
-                   }
-                   System.out.println(" yyyyyyyyyy:");
-                  
-                   for(int i = 0;i< ArrayYe.size();i++){
-                       // System.out.println(" yyyyyyyyyy");
-                        System.out.println(ArrayYe.get(i)+" y");
-                   }
-                   //  String Str = new String("Разделяем эту строку на слова");
-
-                //                    for (String retval : Str.split(" ")) {
-                //         System.out.println(retval);}
-                    }
+                       double_arg = Double.parseDouble(Coords_Str[i]);
+                       ArrayY.add(double_arg); 
+                   }    
+                }
   
                 catch(IOException ex){
                     System.out.println(ex.getMessage());
                 }
-               
             jTextField1.setText("OK");
             }
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
-    
     
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
@@ -191,7 +168,6 @@ public class MainJFrame extends javax.swing.JFrame {
             }
         });
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
