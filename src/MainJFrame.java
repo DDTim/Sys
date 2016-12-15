@@ -70,11 +70,12 @@ public class MainJFrame extends javax.swing.JFrame {
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
        
-        String[] Coord_Str;
-        String[] ArrayX;
-        String[] ArrayY;
+        String[] Coords_Str;
+        //String[] ArrayXe;
+        //String[] ArrayYe;
         ArrayList<String> Coord_List = new ArrayList<String>();
-        
+        ArrayList<String> ArrayXe = new ArrayList<String>();
+        ArrayList<String> ArrayYe = new ArrayList<String>();
          
         RegPointTNO reg = new RegPointTNO();
         JFileChooser fileopen = new JFileChooser(); 
@@ -84,12 +85,9 @@ public class MainJFrame extends javax.swing.JFrame {
                 try(FileReader reader = new FileReader(file))
                     {
                     char[] buffer = new char[(int)file.length()];// считаем файл полностью
-                    reader.read(buffer);
-                    
+                    reader.read(buffer);                    
                     String TextTNO = new String(buffer);         // делаем текст строкой
-
                     int index = TextTNO.indexOf("Waveform Values");     // получаем индекс нужной строки
-
                     for(int i = 0;i<5;i++){
                         index = TextTNO.indexOf("\r\n", index+1);  //  поиск начала нужных данных(пропуск пяти строк)
                         }
@@ -103,22 +101,47 @@ public class MainJFrame extends javax.swing.JFrame {
                     
                     //теперь можно заполнять массив х и у координатами отдельно
                     
-                   Coord_Str = new String[Coord_List.size()];
+                   Coords_Str = new String[Coord_List.size()];
                    for(int i = 0;i<Coord_List.size();i++)
                         {
                             Coord_List.set(i, Coord_List.get(i).trim());
                             for (String retval : Coord_List.get(i).split("   ")) {
-                                Coord_Str[i] =  retval;
-                                System.out.println(Coord_Str[i]);     // одномерный массив координат, с покозателем Е
+                                Coords_Str[i] =  retval;
+                                System.out.println(Coords_Str[i]+" Все значения");     // одномерный массив координат, с покозателем Е
                             }   
                         }
-              //     String Str = new String("Разделяем эту строку на слова");
+                 //  ArrayXe = new String[Coord_List.size()/2];
+                 //  ArrayYe = new String[Coord_List.size()/2];
+                   for(int i = 1; i < Coords_Str.length;i++){
+                       
+                    //   System.out.println(Coords_Str[i]+"ss");
+                       ArrayXe.add(Coords_Str[i]);
+                    //   ArrayYe.add(Coords_Str[i+1]);    
+                    }
+                   for(int i = 0; i < Coords_Str.length; i = i+1){
+                       System.out.println(Coords_Str[3]+"Yr");
+                       ArrayYe.add(Coords_Str[i]); 
+                   }
+                   
+                   
+                   for(int i = 0;i< ArrayXe.size();i++){
+                       
+                        System.out.println(ArrayXe.get(i)+" x");
+                       // System.out.println(" yyyyyyyyyy");
+                        //System.out.println(ArrayYe.get(i)+" y");
+                   }
+                   System.out.println(" yyyyyyyyyy:");
+                   for(int i = 0;i< ArrayYe.size();i++){
+
+                       // System.out.println(" yyyyyyyyyy");
+                        System.out.println(ArrayYe.get(i)+" y");
+                   }
+                   //  String Str = new String("Разделяем эту строку на слова");
 
                 //                    for (String retval : Str.split(" ")) {
                 //         System.out.println(retval);}
                     }
-                
-                    
+  
                 catch(IOException ex){
                     System.out.println(ex.getMessage());
                 }
