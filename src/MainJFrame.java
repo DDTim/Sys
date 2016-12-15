@@ -89,7 +89,7 @@ public class MainJFrame extends javax.swing.JFrame {
                     String TextTNO = new String(buffer);         // делаем текст строкой
                     int index = TextTNO.indexOf("Waveform Values");     // получаем индекс нужной строки
                     for(int i = 0;i<5;i++){
-                        index = TextTNO.indexOf("\r\n", index+1);  //  поиск начала нужных данных(пропуск пяти строк)
+                        index = TextTNO.indexOf("\r\n", index) + 1;  //  поиск начала нужных данных(пропуск пяти строк)
                         }
                     String pointsTNO = TextTNO.substring(index, TextTNO.length());// K
                     pointsTNO.trim();
@@ -101,38 +101,39 @@ public class MainJFrame extends javax.swing.JFrame {
                     
                     //теперь можно заполнять массив х и у координатами отдельно
                     
-                   Coords_Str = new String[Coord_List.size()];
+                   Coords_Str = new String[Coord_List.size()*2];
                    for(int i = 0;i<Coord_List.size();i++)
                         {
+                            int j = 2*i;
                             Coord_List.set(i, Coord_List.get(i).trim());
                             for (String retval : Coord_List.get(i).split("   ")) {
-                                Coords_Str[i] =  retval;
-                                System.out.println(Coords_Str[i]+" Все значения");     // одномерный массив координат, с покозателем Е
+                                Coords_Str[j] =  retval;
+                                
+                                System.out.println(Coords_Str[j]+" Все значения");     // одномерный массив координат, с покозателем Е
+                                ++j;
                             }   
                         }
                  //  ArrayXe = new String[Coord_List.size()/2];
                  //  ArrayYe = new String[Coord_List.size()/2];
-                   for(int i = 1; i < Coords_Str.length;i++){
-                       
+                   for(int i = 0; i < Coords_Str.length;i = i+2){                       
                     //   System.out.println(Coords_Str[i]+"ss");
                        ArrayXe.add(Coords_Str[i]);
                     //   ArrayYe.add(Coords_Str[i+1]);    
                     }
-                   for(int i = 0; i < Coords_Str.length; i = i+1){
-                       System.out.println(Coords_Str[3]+"Yr");
+                   for(int i = 1; i < Coords_Str.length; i = i+2){
+                   //    System.out.println(Coords_Str[3]+"Yr");
                        ArrayYe.add(Coords_Str[i]); 
                    }
                    
                    
-                   for(int i = 0;i< ArrayXe.size();i++){
-                       
+                   for(int i = 0;i< ArrayXe.size();i++){                       
                         System.out.println(ArrayXe.get(i)+" x");
                        // System.out.println(" yyyyyyyyyy");
                         //System.out.println(ArrayYe.get(i)+" y");
                    }
                    System.out.println(" yyyyyyyyyy:");
+                  
                    for(int i = 0;i< ArrayYe.size();i++){
-
                        // System.out.println(" yyyyyyyyyy");
                         System.out.println(ArrayYe.get(i)+" y");
                    }
